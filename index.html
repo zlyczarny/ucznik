@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucznik - Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="app-header"><h1>
+Ucznik</h1>
+<div id="dark-mode-toggle">
+    <label class="switch">
+        <input type="checkbox" id="dark-mode-checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+</header>
+    <div class="quiz-container">
+        <img id="question-image" src="" alt="Question Image" style="display: none; max-width: 100%; height: auto; margin-bottom: 10px;">
+        <div id="question">Loading question...</div>
+        <div id="answers"></div>
+        <button id="check-button" style="display:none;">Check Answer</button>
+        <button id="next-button" style="display:none;">Next</button>
+    </div>
+    
+    <footer id="app-footer">
+        <p>made by zlyczarny with AI</p>
+    </footer>
+<script src="app.js"></script>
+</body>
+</html>
