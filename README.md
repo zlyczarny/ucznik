@@ -1,5 +1,6 @@
 # ucznik
 The application is a web-based quiz platform designed to test users' knowledge through multiple-choice questions. Questions can be loaded via CSV file. The main features and functionalities of the application include:
+
 Key Features:
 
     Multiple-Choice Questions:
