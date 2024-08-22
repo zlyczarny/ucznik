@@ -1,6 +1,18 @@
 # ucznik
 The application is a web-based quiz platform designed to test users' knowledge through multiple-choice questions. Questions can be loaded via CSV file. The main features and functionalities of the application include:
 
+CSV Format:
+Question;answer 1;answer 2;answer 3;answer 4;answer 5;correct answer;link to question graphic
+
+Example:
+Select and Place:\nChoose:;A. <img src='images\77a.png'>;b;c;d;e;A. <img src='images\77a.png'>;images\77.png
+
+Special options: 
+\n - next line in question or answer
+<img src='images\77a.png'> - graphic in answer
+const totalQuestions = 10; - set amount of asked questions
+
+
 Key Features:
 
     Multiple-Choice Questions:

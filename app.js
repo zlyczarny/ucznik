@@ -4,21 +4,38 @@ let score = 0;
 const totalQuestions = 10;
 
 // Wczytanie pytań z pliku CSV
+// Wczytanie pytań z pliku CSV
 fetch('questions.csv')
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.text();
+    })
     .then(data => {
         const lines = data.trim().split('\n');
         lines.forEach(line => {
-            const [question, answer1, answer2, answer3, answer4, correctAnswers, imageUrl] = line.split(';');
+            const [question, answer1, answer2, answer3, answer4, answer5, correctAnswers, imageUrl] = line.split(';');
+            const answers = [answer1, answer2, answer3, answer4];
+            if (answer5) answers.push(answer5); // Dodanie piątej odpowiedzi, jeśli istnieje
+
             questions.push({
-                question,
-                answers: [answer1, answer2, answer3, answer4],
+                question: question.replace(/\\n/g, '\n'), // Zamiana "\n" na prawdziwy znak nowej linii w pytaniu
+                answers: answers.map(ans => ans.replace(/\\n/g, '<br>')), // Zamiana "\n" na <br> w odpowiedziach
                 correctAnswers: correctAnswers.split(',').map(ans => ans.trim()), // Tworzenie tablicy prawidłowych odpowiedzi
                 imageUrl: imageUrl ? imageUrl.trim() : null
             });
         });
         startQuiz();
+    })
+    .catch(error => {
+        console.error('Error fetching or parsing the questions:', error);
+        // Display an error message to the user
+        const questionElement = document.getElementById('question');
+        questionElement.innerText = 'An error occurred while loading the quiz. Please try again later.';
     });
+
+
 
 function startQuiz() {
     questions.sort(() => 0.5 - Math.random());
@@ -46,7 +63,7 @@ function showQuestion() {
 
     currentQuestion.answers.forEach(answer => {
         const answerButton = document.createElement('button');
-        answerButton.innerText = answer;
+        answerButton.innerHTML = answer;  // Użycie innerHTML zamiast innerText do interpretowania HTML w odpowiedziach
         answerButton.classList.add('answer');
         answerButton.addEventListener('click', () => selectAnswer(answer, answerButton));
         answersElement.appendChild(answerButton);
@@ -56,6 +73,7 @@ function showQuestion() {
     checkButton.style.display = 'block';
     nextButton.style.display = 'none';
 }
+
 
 let selectedAnswers = [];
 
@@ -93,19 +111,21 @@ function checkAnswer() {
     const answerButtons = document.querySelectorAll('.answer');
 
     answerButtons.forEach(button => {
-        const answerText = button.innerText.trim();
+        // Extract the text content
+        const answerText = button.textContent.trim();
     
-        // Usunięcie klasy 'selected'
+        // Remove 'selected' class
         button.classList.remove('selected');
     
-        // Dodanie odpowiednich klas w zależności od poprawności odpowiedzi
         if (correctAnswers.includes(answerText)) {
             button.classList.add('correct');
+            console.log(`Correct class added to: ${answerText}`);
         } else if (selectedAnswers.includes(answerText)) {
             button.classList.add('wrong');
+            console.log(`Wrong class added to: ${answerText}`);
         }
     
-        // Zablokowanie przycisku po sprawdzeniu odpowiedzi
+        // Disable the button
         button.disabled = true;
     });
     
@@ -117,11 +137,11 @@ function checkAnswer() {
     }
 }
 
-
-
-
 function showScore() {
-    document.getElementById('question').innerText = `You scored ${score} out of ${Math.min(totalQuestions, questions.length)}`;
+    const totalAnsweredQuestions = Math.min(totalQuestions, questions.length);
+    const percentageScore = (score / totalAnsweredQuestions) * 100;
+
+    document.getElementById('question').innerText = `You scored ${score} out of ${totalAnsweredQuestions} (${percentageScore.toFixed(2)}%)`;
     document.getElementById('answers').innerHTML = '';
     document.getElementById('check-button').style.display = 'none';
     document.getElementById('next-button').style.display = 'none';
