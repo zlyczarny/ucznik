@@ -18,6 +18,10 @@ A dynamic quiz application built with vanilla JavaScript that fetches questions 
 - After checking the answer, the **Next** button will appear to move to the next question.
 - At the end of the quiz, the total score and percentage of correct answers will be displayed.
 
+## Demo
+
+You can try out the quiz application [https://zlyczarny.github.io/ucznik/](#).
+
 ## CSV File Format
 
 The `questions.csv` file should be formatted as follows:
