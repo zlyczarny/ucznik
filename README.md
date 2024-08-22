@@ -20,7 +20,7 @@ A dynamic quiz application built with vanilla JavaScript that fetches questions 
 
 ## Demo
 
-You can try out the quiz application [https://zlyczarny.github.io/ucznik/](#).
+You can try out the quiz application [https://zlyczarny.github.io/ucznik/](https://zlyczarny.github.io/ucznik/).
 
 ## CSV File Format
 
