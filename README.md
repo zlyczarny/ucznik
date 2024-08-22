@@ -1,58 +1,40 @@
 # ucznik
-The application is a web-based quiz platform designed to test users' knowledge through multiple-choice questions. Questions can be loaded via CSV file. The main features and functionalities of the application include:
 
-CSV Format:
-Question;answer 1;answer 2;answer 3;answer 4;answer 5;correct answer;link to question graphic
+A dynamic quiz application built with vanilla JavaScript that fetches questions from a CSV file. Users can answer multiple-choice questions and receive a score along with the percentage of correct answers at the end.
 
+## Features
+
+- **Dynamic Question Loading**: Questions are loaded from a CSV file, making it easy to update the quiz content without changing the code.
+- **Multiple-Choice Questions**: Supports up to five answer options for each question.
+- **Random Question Order**: Questions are randomized each time the quiz is started.
+- **Scoring System**: Tracks the number of correct answers and calculates the percentage score.
+- **Dark Mode**: Users can switch between light and dark modes.
+- **Image Support**: Display images alongside questions, if available.
+
+## Usage
+
+- On loading the page, the quiz will automatically fetch the questions from the `questions.csv` file.
+- Users can select one or more answers (if applicable) and click the **Check Answer** button to submit their answer.
+- After checking the answer, the **Next** button will appear to move to the next question.
+- At the end of the quiz, the total score and percentage of correct answers will be displayed.
+
+## CSV File Format
+
+The `questions.csv` file should be formatted as follows:
+
+```plaintext
+Question;Answer1;Answer2;Answer3;Answer4;Answer5;CorrectAnswers;ImageURL
+```
 Example:
-Select and Place:\nChoose:;A. <img src='images\77a.png'>;b;c;d;e;A. <img src='images\77a.png'>;images\77.png
+```
+What answer is correct?:\nChoose two:;A. <img src='images\1a.png'>;B;C;D;E;A.,C;images\1.png
+```
 
+------------
 Special options: 
+```
 \n - next line in question or answer
 <img src='images\77a.png'> - graphic in answer
-const totalQuestions = 10; - set amount of asked questions
+const totalQuestions = 10; - set amount of asked questions in app.js
+```
 
-
-Key Features:
-
-    Multiple-Choice Questions:
-        The application displays a series of questions, each with four possible answers. Some questions may have more than one correct answer.
-        Questions are read from a CSV file, which includes the question text, possible answers, correct answers, and optionally an image related to the question.
-
-    Image Support:
-        If a question includes an image, it is displayed above the question text. This feature supports visual learning and adds context to the questions.
-
-    Interactive Answer Selection:
-        Users can select one or more answers by clicking on the corresponding buttons. Selected answers are highlighted in light blue.
-        After selecting their answers, users can click the "Check Answer" button to submit their responses.
-
-    Feedback Mechanism:
-        Once the answers are submitted, the correct answers are highlighted in green, and incorrect selections are highlighted in red.
-        This immediate feedback helps users understand their mistakes and learn from them.
-
-    Scoring System:
-        The application keeps track of the user’s score based on the correctness of their answers.
-        At the end of the quiz (after 10 questions or the number of questions available), the application displays the final score.
-
-    Dark Mode:
-        Users can toggle between light and dark mode using a switch located at the top of the page.
-        Dark mode settings are remembered between sessions using localStorage, ensuring the user's preferred theme is applied automatically upon returning to the site.
-
-    Responsive Design:
-        The application is designed to be responsive, ensuring that it works well on different screen sizes, from desktops to mobile devices.
-
-
-Technical Overview:
-
-    HTML/CSS/JavaScript:
-        The front end is built using HTML, CSS, and vanilla JavaScript, making it lightweight and fast-loading.
-    CSV Integration:
-        Questions and answers are dynamically loaded from a CSV file, allowing easy updates to the question set without modifying the code.
-    Dynamic Content:
-        Questions are shuffled and displayed in random order to ensure that each quiz attempt is unique.
-    Accessibility:
-        The application is designed with accessibility in mind, including keyboard navigability and clear visual cues for selected and correct/incorrect answers.
-
-Usage Scenario:
-
-The application is ideal for educational purposes, where students or users can test their knowledge on a particular subject. It can be used in classrooms, self-study sessions, or even as a fun trivia game. The support for images and multiple correct answers makes it versatile for different types of quizzes, from simple fact-based questions to more complex scenarios requiring deeper understanding.
